@@ -1,0 +1,6 @@
+@layer base, components;
+@import 'global.css' layer(base);
+
+h2{
+  color: green;
+}
