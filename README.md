@@ -1,7 +1,33 @@
 # layer-test-2
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is a demo app to show a bug in embroider when using CSS layers.
+
+When you specify CSS layers at the top of `app.css` then imports below it disappear in the production build. The development build works as expected (nothing is removed from app.css).
+
+So when you specify the following `app.css` file
+
+```css
+/* app.css */
+@layer base, components;
+@import 'global.css' layer(base);
+
+h1{
+  color: red;
+}
+```
+
+when you run `ember serve --environment=production` then you get the following `app.css` in the `dist/assets` directory:
+
+```css
+/* app.css */
+@layer base, components;
+h1{
+  color: red;
+}
+```
+> Import disappeared!
+
+When you move defining layers under the imports then everything works as expected and nothing is removed from `app.css`
 
 ## Prerequisites
 
